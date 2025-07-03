@@ -2,15 +2,26 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
-function MyButton() {
-    const [count, setCount] = useState(0);
-    function handleClick() {
-        setCount(count + 1);
-        //alert('You clicked me!');
-    }
-   
+//別々にカウントするボタンを作る
+// function MyButton() {
+//     // const [count, setCount] = useState(0);
+//     // function handleClick() {
+//     //     setCount(count + 1);
+//     //     //alert('You clicked me!');
+//     // }
+
+//     // return (
+//     //     <button onClick={handleClick}>  Clicked {count} times</button>
+//     // );
+//     // ... we're moving code from here ...
+//   }
+
+// 同時にカウントするボタンを作る
+function MyButton({ count, onClick }) {
     return (
-        <button onClick={handleClick}>  Clicked {count} times</button>
+        <button onClick={onClick}>
+            Clicked {count} times
+        </button>
     );
   }
 
@@ -45,12 +56,20 @@ const listItems = products.map(product =>
     </li>
 );
 function App() {
+    const [count, setCount] = useState(0);
+
+    function handleClick() {
+        setCount(count + 1);
+    }
   return (
     <div className="App">
           <h1>Welcome to my app</h1>
-          <h1>Counters that update separately</h1>
-          <MyButton />
-          <MyButton />
+          {/* <h1>Counters that update separately</h1> */}
+          <h1>Counters that update together</h1>
+          <MyButton count={count} onClick={handleClick} />
+          <MyButton count={count} onClick={handleClick} />
+          {/* <MyButton />
+          <MyButton /> */}
           <AboutPage />
           <h1>{user.name}</h1>
           <img
